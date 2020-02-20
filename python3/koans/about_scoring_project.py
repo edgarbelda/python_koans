@@ -34,7 +34,17 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    result = 0
+    ones = dice.count(1)
+    fives = dice.count(5)
+    comprehension = [value * (dice.count(value)//3)*100 for value in [2,3,4,6,7,8,9]]
+
+    result += ones // 3 * 1000 + ones % 3 * 100
+    result += fives // 3 * 500 + fives % 3 * 50
+    result += sum(comprehension)
+
+    return result
+
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
