@@ -14,9 +14,13 @@ class DiceSet:
         return self._values
 
     def roll(self, n):
+        min = 1
+        max = 6
+        rollDice = (random.randint(min,max) for n in range(n))
+        self._values = list(rollDice)
         # Needs implementing!
         # Tip: random.randint(min, max) can be used to generate random numbers
-        pass
+
 
 class AboutDiceProject(Koan):
     def test_can_create_a_dice_set(self):
