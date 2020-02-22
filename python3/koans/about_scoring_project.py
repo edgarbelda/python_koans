@@ -37,10 +37,10 @@ def score(dice):
     result = 0
     ones = dice.count(1)
     fives = dice.count(5)
-    comprehension = [value * (dice.count(value)//3)*100 for value in [2,3,4,6,7,8,9]]
+    comprehension = [value * (dice.count(value)//3)*100 for value in range(2,7)]
 
-    result += ones // 3 * 1000 + ones % 3 * 100
-    result += fives // 3 * 500 + fives % 3 * 50
+    result += ones // 3 * 1000 + ones % 3 * 100 + fives % 3 * 50
+
     result += sum(comprehension)
 
     return result
