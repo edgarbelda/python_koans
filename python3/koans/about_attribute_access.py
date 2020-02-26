@@ -172,8 +172,8 @@ class AboutAttributeAccess(Koan):
         # NOTE: Change the prefix to make this next assert pass
         #
 
-        prefix = '__'
-        self.assertEqual("The Laminator, issue #1", getattr(fanboy, prefix + '_comic'))
+        prefix = 'my_'
+        self.assertEqual("The Laminator, issue #1", getattr(fanboy, prefix + 'comic'))
 
     # ------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ class AboutAttributeAccess(Koan):
         setter = self.ScarySetter()
         setter.e = "mc hammer"
 
-        self.assertEqual(__, setter.altered_e)
+        self.assertEqual("mc hammer", setter.altered_e)
 
     def test_it_mangles_some_internal_attributes(self):
         setter = self.ScarySetter()
@@ -202,9 +202,9 @@ class AboutAttributeAccess(Koan):
         try:
             coconuts = setter.num_of_coconuts
         except AttributeError:
-            self.assertEqual(__, setter.altered_num_of_coconuts)
+            self.assertEqual(9, setter.altered_num_of_coconuts)
 
     def test_in_this_case_private_attributes_remain_unmangled(self):
         setter = self.ScarySetter()
 
-        self.assertEqual(__, setter._num_of_private_coconuts)
+        self.assertEqual(2, setter._num_of_private_coconuts)
