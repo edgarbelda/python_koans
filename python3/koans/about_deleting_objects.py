@@ -7,15 +7,17 @@ class AboutDeletingObjects(Koan):
     def test_del_can_remove_slices(self):
         lottery_nums = [4, 8, 15, 16, 23, 42]
         del lottery_nums[1]
+        #[4, 15, 16, 23, 42]
         del lottery_nums[2:4]
+        #[4, 15, 42]
 
-        self.assertEqual(___, lottery_nums)
+        self.assertEqual([4,15,42], lottery_nums)
 
     def test_del_can_remove_entire_lists(self):
         lottery_nums = [4, 8, 15, 16, 23, 42]
         del lottery_nums
 
-        with self.assertRaises(___): win = lottery_nums
+        with self.assertRaises(UnboundLocalError): win = lottery_nums
 
     # ====================================================================
 
@@ -48,8 +50,8 @@ class AboutDeletingObjects(Koan):
         except AttributeError as e:
             err_msg2 = e.args[0]
 
-        self.assertRegex(err_msg1, __)
-        self.assertRegex(err_msg2, __)
+        self.assertRegex(err_msg1, 'toilet_brushes')
+        self.assertRegex(err_msg2, 'hamsters')
 
     # ====================================================================
 
@@ -78,7 +80,7 @@ class AboutDeletingObjects(Koan):
         self.assertEqual('Senor Ninguno', cowboy.name)
 
         del cowboy.name
-        self.assertEqual(__, cowboy.name)
+        self.assertEqual('The man with no name', cowboy.name)
 
 
     # ====================================================================
@@ -105,7 +107,7 @@ class AboutDeletingObjects(Koan):
         self.assertEqual('Patrick', citizen.name)
 
         del citizen.name
-        self.assertEqual(__, citizen.name)
+        self.assertEqual('Number Six', citizen.name)
 
     # ====================================================================
 
@@ -114,11 +116,12 @@ class AboutDeletingObjects(Koan):
             self.last_deletion = None
             super().__init__()
 
+        #Borra el valor del atributo y asigna el nombre a su valor
         def __delattr__(self, attr_name):
             self.last_deletion = attr_name
 
     def tests_del_can_be_overriden(self):
         sale = self.MoreOrganisedClosingSale()
-        self.assertEqual(__, sale.jellies())
+        self.assertEqual(5, sale.jellies())
         del sale.jellies
-        self.assertEqual(__, sale.last_deletion)
+        self.assertEqual('jellies', sale.last_deletion)
